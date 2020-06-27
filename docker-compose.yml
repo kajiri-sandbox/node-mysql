@@ -1,0 +1,45 @@
+version: '3'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ./app/Dockerfile
+    depends_on:
+      - mysql
+      - redis
+    volumes:
+      - ./app:/home/app
+    tty: true
+    container_name: node_app
+    ports:
+      - '3000:3000'
+
+  mysql:
+    build:
+      context: .
+      dockerfile: ./mysql/Dockerfile
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_USER: user
+      MYSQL_PASSWORD: hogehoge
+      MYSQL_DATABASE: testdb
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+      - ./mysql/sql:/docker-entrypoint-initdb.d
+    container_name: mysql
+    ports:
+      - 3306:3306
+
+  redis:
+    build:
+      context: .
+      dockerfile: ./redis/Dockerfile
+    restart: always
+    volumes:
+      - ./data/redis:/data
+    container_name: redis
+    ports:
+      - "6379:6379"
