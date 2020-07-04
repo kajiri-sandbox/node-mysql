@@ -1,9 +1,8 @@
-const {HOST, USER, PASSWORD, DATABASE, PORT} = process.env
-if (!HOST || !USER || !PASSWORD || !DATABASE || !PORT) throw new Error('env require')
+const {HOST, USER, PASSWORD, DATABASE} = process.env
+if (!HOST || !USER || !PASSWORD || !DATABASE) throw new Error('env require')
 
 const express = require('express')
 const app = express()
-app.set('port', PORT)
 
 // mysqlに接続
 var mysql = require('mysql');
@@ -41,7 +40,7 @@ function handleDisconnect() {
     });
 }
 handleDisconnect();
-app.listen(3000, () => console.log('Example app listening on port 3000!'))
+app.listen(3000, () => console.log(`Example app listening on 3000 ${3000}!`))
 
 // 接続確認用
 app.get('/', (req, res) => {
