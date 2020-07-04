@@ -12,18 +12,13 @@ var mysqlConnection = {
   password : PASSWORD,
   database : DATABASE
 }
-var connection = mysql.createConnection(mysqlConnection);
-connection.connect(function(err){
-  if (err) throw err;
-  console.log('Connected!!')
-});
-app.listen(3000, () => console.log('Example app listening on port 3000!'))
 
 // PROTOCOL_CONNECTION_LOSTエラーが起きたら再接続してくれるらっしい
 // http://ninna2.hatenablog.com/entry/2017/02/22/node-mysql%E3%81%A7%E6%8E%A5%E7%B6%9A%E3%81%8C%E5%88%87%E3%82%8C%E3%82%8B%E7%82%B9%E3%82%92%E6%94%B9%E5%96%84
+var connection
 function handleDisconnect() {
     console.log('INFO.CONNECTION_DB: ');
-    connection = mysql.createConnection(db_config);
+    connection = mysql.createConnection(mysqlConnection);
     
     //connection取得
     connection.connect(function(err) {
@@ -45,6 +40,7 @@ function handleDisconnect() {
     });
 }
 handleDisconnect();
+app.listen(3000, () => console.log('Example app listening on port 3000!'))
 
 // 接続確認用
 app.get('/', (req, res) => {
