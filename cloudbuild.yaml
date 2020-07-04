@@ -1,6 +1,6 @@
 steps:
 # 1：イメージを作成
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'gcr.io/$PROJECT_ID/sample:$COMMIT_SHA', '-f', 'app/Dockerfile', '.', '--build-arg', 'HOST="${_HOST}"', '--build-arg', 'USER="${_USER}"', '--build-arg', 'PASSWORD="${_PASSWORD}"', '--build-arg', 'DATABASE="${_DATABASE}"']
+  args: ['build', '-t', 'gcr.io/$PROJECT_ID/sample:$COMMIT_SHA', '-f', 'app/Dockerfile', '.', '--build-arg', 'HOST=${_HOST}', '--build-arg', 'USER=${_USER}', '--build-arg', 'PASSWORD=${_PASSWORD}', '--build-arg', 'DATABASE=${_DATABASE}']
 images: ['gcr.io/$PROJECT_ID/sample:$COMMIT_SHA']
 
