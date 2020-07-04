@@ -9,11 +9,13 @@ RUN npm i -g nodemon
 
 COPY ./app ./
 
-EXPOSE 3000
 
 ARG HOST
 ARG USER
 ARG PASSWORD
 ARG DATABASE
+ARG PORT
 ENV HOST=$HOST USER=$USER PASSWORD=$PASSWORD DATABASE=$DATABASE
-CMD nodemon app.js localhost 3000
+
+EXPOSE $PORT
+CMD nodemon app.js localhost $PORT

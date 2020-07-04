@@ -1,8 +1,9 @@
-const {HOST, USER, PASSWORD, DATABASE} = process.env
-if (!HOST || !USER || !PASSWORD || !DATABASE) throw new Error('env require')
+const {HOST, USER, PASSWORD, DATABASE, PORT} = process.env
+if (!HOST || !USER || !PASSWORD || !DATABASE || !PORT) throw new Error('env require')
 
 const express = require('express')
 const app = express()
+app.set('port', PORT)
 
 // mysqlに接続
 var mysql = require('mysql');
