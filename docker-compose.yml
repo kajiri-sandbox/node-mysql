@@ -11,6 +11,7 @@ services:
     volumes:
       - ./app:/home/app
     tty: true
+    restart: always
     container_name: node_app
     ports:
       - '3000:3000'

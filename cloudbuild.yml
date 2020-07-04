@@ -1,0 +1,9 @@
+steps:
+# 1：npmのバージョン表示
+- name: 'gcr.io/cloud-builders/npm:latest'
+  args: ['version']
+  id: 'npm-version'
+# 4：イメージを作成
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'gcr.io/$PROJECT_ID/sample', '-f', 'app/Dockerfile', '.']
+images: ['gcr.io/$PROJECT_ID/sample']
